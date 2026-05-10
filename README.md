@@ -55,31 +55,6 @@ uvicorn app.main:app --reload --port 8000
 
 The backend runs on http://localhost:8000.
 
-### Seed Demo Data
-
-```bash
-cd my-app/backend
-python seed.py
-```
-
-This creates two demo accounts and sample trips:
-
-| Role  | Email                  | Password   |
-|-------|------------------------|------------|
-| Admin | admin@traveloop.com    | Admin@123  |
-| User  | demo@traveloop.com     | Demo@123   |
-
-## Configuration
-
-Copy `backend/.env.example` to `backend/.env` and set these values:
-
-| Variable           | Description                        | Default                                            |
-|--------------------|------------------------------------|----------------------------------------------------|
-| `DATABASE_URL`     | Async DB connection string         | `sqlite+aiosqlite:///./traveloop.db`               |
-| `JWT_SECRET_KEY`   | Secret key for signing tokens      | `CHANGE-ME-TO-A-RANDOM-64-CHAR-SECRET`             |
-| `CORS_ORIGINS`     | Allowed frontend origins (JSON)    | `["http://localhost:3000"]`                         |
-| `BCRYPT_ROUNDS`    | Password hashing cost factor       | `12`                                               |
-
 ## Project Structure
 
 ```
@@ -103,11 +78,3 @@ my-app/
 ## API Documentation
 
 When the backend is running, open http://localhost:8000/docs for the interactive Swagger UI.
-
-## Currency
-
-All monetary values are stored in USD on the backend and displayed as INR on the frontend using a fixed conversion rate of 1 USD = 83 INR.
-
-## License
-
-Built for the Odoo Hackathon 2026.
