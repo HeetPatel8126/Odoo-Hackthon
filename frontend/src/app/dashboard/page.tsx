@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { Plus, Map, PackageCheck, NotebookPen, ArrowRight } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -19,7 +21,23 @@ const today = new Date().toLocaleDateString('en-US', {
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/login');
+    }
+  }, [user, loading, router]);
+
   const displayName = user ? user.full_name.split(' ')[0] : 'Traveler';
+
+  if (loading || !user) {
+    return (
+      <div className="min-h-[calc(100vh-65px)] max-w-7xl mx-auto px-6 py-12 md:py-20 flex items-center justify-center">
+        <div className="w-12 h-12 border-4 border-gray-200 border-t-black rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-[calc(100vh-65px)] max-w-7xl mx-auto px-6 py-12 md:py-20">

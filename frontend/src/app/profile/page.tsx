@@ -1,11 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Camera, Pencil, X, Trash2 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 export default function ProfilePage() {
   const { user, loading } = useAuth();
+  const router = useRouter();
+  
   const [isEditing, setIsEditing] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [language, setLanguage] = useState('English');
@@ -17,6 +20,12 @@ export default function ProfilePage() {
     city: 'Ahmedabad',
     country: 'India'
   });
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push('/login');
+    }
+  }, [user, loading, router]);
 
   // Sync form data when user loads
   useEffect(() => {
